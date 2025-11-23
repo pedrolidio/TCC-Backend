@@ -68,7 +68,7 @@ class DrivingConfigurationService {
     };
   }
 
-  async getById(vehicle_id, config_id) {
+  async getByIdAndVehicleId(config_id, vehicle_id) {
     await VehicleService.getVehicleById(vehicle_id);
 
     const config = await DrivingConfigurationRepository.findByIdAndVehicleId(config_id, vehicle_id);

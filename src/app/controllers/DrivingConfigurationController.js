@@ -24,7 +24,7 @@ class DrivingConfigurationController {
   async show(req, res, next) {
     try {
       const { id: vehicle_id, config_id } = req.params;
-      const config = await DrivingConfigurationService.getById(vehicle_id, config_id);
+      const config = await DrivingConfigurationService.getByIdAndVehicleId(config_id, vehicle_id);
       res.json(config);
     } catch (error) {
       next(error);
