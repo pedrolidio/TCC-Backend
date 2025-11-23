@@ -2,14 +2,14 @@ const SensorsDataRepository = require("../repositories/SensorsDataRepository");
 const DrivingConfigurationService = require("./DrivingConfigurationService");
 
 class SensorsDataService {
-  async getByDrivingConfigurationId(drivingConfigurationId) {
+  async getByDrivingConfigurationIdAndVehicleId(drivingConfigurationId, vehicleId) {
     if (!drivingConfigurationId) {
       const error = new Error("MISSING_CONFIG_ID_PARAM");
       error.status = 400;
       throw error;
     }
 
-    const config = await DrivingConfigurationService.getById(drivingConfigurationId);
+    const config = await DrivingConfigurationService.getByIdAndVehicleId(drivingConfigurationId, vehicleId);
     const { vehicle_id, start_date, end_date } = config;
 
     return await SensorsDataRepository.findByVehicleAndDateRange(
