@@ -79,8 +79,7 @@ class DrivingConfigurationService {
       throw error;
     }
 
-    const configSensors = await DrivingConfigurationRepository.findSensorsByConfig(config.id);
-    const sensors = configSensors.map(s => s.command);
+    const sensors = await DrivingConfigurationRepository.findSensorsByConfig(config.id);
 
     return {
       id: config.id,
