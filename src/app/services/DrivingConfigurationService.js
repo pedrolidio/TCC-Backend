@@ -68,16 +68,30 @@ class DrivingConfigurationService {
     };
   }
 
-  async getById(id) {
-    const config = await DrivingConfigurationRepository.findById(id);
-    
+  async getById(vehicle_id, config_id) {
+    await VehicleService.getVehicleById(vehicle_id);
+
+    const config = await DrivingConfigurationRepository.findByIdAndVehicleId(config_id, vehicle_id);
+
     if (!config) {
       const error = new Error("CONFIG_NOT_FOUND");
       error.status = 404;
       throw error;
     }
 
-    return config;
+    const configSensors = await DrivingConfigurationRepository.findSensorsByConfig(config.id);
+    const sensors = configSensors.map(s => s.command);
+
+    return {
+      id: config.id,
+      driver_id: config.driver_id,
+      vehicle_id: config.vehicle_id,
+      start_date: config.start_date,
+      end_date: config.end_date,
+      include_gps: config.gps_enabled,
+      sample_interval: config.sampling_interval,
+      sensors: sensors
+    };
   }
 
   async getByVehicleId(id) {

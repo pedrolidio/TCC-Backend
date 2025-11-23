@@ -57,9 +57,9 @@ class DrivingConfigurationRepository {
     });
   }
 
-  async findById(id) {
+  async findByIdAndVehicleId(id, vehicleId) {
     return this.connection("Driving_Configurations")
-      .where({ id })
+      .where({ id, vehicle_id: vehicleId })
       .first();
   }
 

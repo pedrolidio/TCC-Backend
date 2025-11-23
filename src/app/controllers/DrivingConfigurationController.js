@@ -10,11 +10,21 @@ class DrivingConfigurationController {
       next(error);
     }
   }
-  
-  async show(req, res, next) {
+
+  async active(req, res, next) {
     try {
       const { id } = req.params;
       const config = await DrivingConfigurationService.getActiveConfig(id);
+      res.json(config);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  async show(req, res, next) {
+    try {
+      const { id: vehicle_id, config_id } = req.params;
+      const config = await DrivingConfigurationService.getById(vehicle_id, config_id);
       res.json(config);
     } catch (error) {
       next(error);
