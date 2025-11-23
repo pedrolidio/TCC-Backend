@@ -15,7 +15,7 @@ class DrivingConfigurationRepository {
     return this.connection("Driving_Configuration_Sensors as dcs")
       .join("OBD_Commands as oc", "dcs.command_id", "oc.id")
       .where("dcs.configuration_id", configId)
-      .select("oc.command", "oc.unit");
+      .select("oc.id", "oc.command", "oc.unit");
   }
 
   async findSensorsByConfigIds(configIds) {
