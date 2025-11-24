@@ -64,6 +64,8 @@ class DrivingConfigurationRepository {
       .where({ "dc.id": id, vehicle_id: vehicleId })
       .select(
         "dc.id", 
+        "d.id as driver_id",
+        "v.id as vehicle_id",
         "d.name as driver", 
         this.connection.raw("CONCAT(v.manufacturer, ' ', v.model, ' (', v.year, ')') as vehicle"), 
         "dc.start_date", 
