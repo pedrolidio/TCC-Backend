@@ -83,8 +83,8 @@ class DrivingConfigurationService {
 
     return {
       id: config.id,
-      driver_id: config.driver_id,
-      vehicle_id: config.vehicle_id,
+      driver: config.driver,
+      vehicle: config.vehicle,
       start_date: config.start_date,
       end_date: config.end_date,
       include_gps: config.gps_enabled,
@@ -122,8 +122,8 @@ class DrivingConfigurationService {
 
       return {
         id: config.id,
-        driver_id: config.driver_id,
-        vehicle_id: config.vehicle_id,
+        driver: config.driver,
+        vehicle: config.vehicle,
         start_date: config.start_date,
         end_date: config.end_date,
         include_gps: config.gps_enabled,

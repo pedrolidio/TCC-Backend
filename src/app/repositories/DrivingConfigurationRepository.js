@@ -58,15 +58,37 @@ class DrivingConfigurationRepository {
   }
 
   async findByIdAndVehicleId(id, vehicleId) {
-    return this.connection("Driving_Configurations")
-      .where({ id, vehicle_id: vehicleId })
+    return this.connection("Driving_Configurations as dc")
+      .join("Drivers as d", "dc.driver_id", "d.id")
+      .join("Vehicles as v", "dc.vehicle_id", "v.id")
+      .where({ "dc.id": id, vehicle_id: vehicleId })
+      .select(
+        "dc.id", 
+        "d.name as driver", 
+        this.connection.raw("CONCAT(v.manufacturer, ' ', v.model, ' (', v.year, ')') as vehicle"), 
+        "dc.start_date", 
+        "dc.end_date", 
+        "dc.gps_enabled", 
+        "dc.sampling_interval"
+      )
       .first();
   }
 
   async findByVehicleId(id) {
-    return this.connection("Driving_Configurations")
+    return this.connection("Driving_Configurations as dc")
+      .join("Drivers as d", "dc.driver_id", "d.id")
+      .join("Vehicles as v", "dc.vehicle_id", "v.id")
       .where({ vehicle_id: id })
-      .orderBy("start_date", "desc");
+      .orderBy("start_date", "desc")
+      .select(
+        "dc.id", 
+        "d.name as driver", 
+        this.connection.raw("CONCAT(v.manufacturer, ' ', v.model, ' (', v.year, ')') as vehicle"), 
+        "dc.start_date", 
+        "dc.end_date", 
+        "dc.gps_enabled", 
+        "dc.sampling_interval"
+      );
   }
 }
 
