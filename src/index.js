@@ -1,4 +1,4 @@
-require("dotenv").config();
+const env = require("./config/env");
 const { connectMongoDB } = require("./config/mongoose");
 const { connectSQL } = require("./config/database");
 const { startServer } = require("./server/server");
@@ -13,7 +13,7 @@ const { startServer } = require("./server/server");
 
     // Inicia o servidor Express
     const app = await startServer();
-    const port = process.env.PORT || 3000;
+    const port = env.port;
 
     app.listen(port, () => console.log(`Servidor rodando em http://localhost:${port}`));
   } catch (error) {

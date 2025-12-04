@@ -1,3 +1,4 @@
+const env = require("./env");
 const knex = require("knex");
 const knexConfig = require("../../knexfile");
 
@@ -9,7 +10,7 @@ async function connectSQL() {
     return sqlConnection;
   }
 
-  const environment = process.env.NODE_ENV || "development";
+  const environment = env.nodeEnv;
   const config = knexConfig[environment];
   sqlConnection = knex(config);
 

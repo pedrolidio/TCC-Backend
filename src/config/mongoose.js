@@ -1,7 +1,8 @@
+const env = require("./env");
 const mongoose = require("mongoose");
 
 async function connectMongoDB() {
-  const uri = process.env.MONGO_URI || "mongodb://localhost:27017/TCC";
+  const uri = env.mongoUri;
   try {
     await mongoose.connect(uri);
     console.log("MongoDB conectado com sucesso.");
