@@ -25,7 +25,10 @@ function errorHandler(err, req, res, next) {
     EXTRA_GPS_DATA: "Dados de GPS (latitude/longitude) foram recebidos, mas não são esperados pela configuração ativa.",
     EXTRA_SENSOR_DATA: "Um sensor foi recebido, mas não é esperado pela configuração ativa.",
     MISSING_SENSOR_DATA: "A configuração ativa espera dados de um sensor, mas não foram recebidos.",
-    NO_ACTIVE_CONFIG_FOR_VEHICLE: "Não há configuração de direção ativa para este veículo. Não é possível salvar os dados."
+    NO_ACTIVE_CONFIG_FOR_VEHICLE: "Não há configuração de direção ativa para este veículo. Não é possível salvar os dados.",
+    USER_NOT_FOUND: "Usuário não encontrado.",
+    PASSWORD_TOO_SHORT: "A senha deve ter no mínimo 8 caracteres!",
+    DUPLICATE_USERNAME: "Usuário com username já cadastrado!",
   };
 
   const message = messages[err.message] || "Erro interno do servidor.";
