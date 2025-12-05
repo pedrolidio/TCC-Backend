@@ -29,7 +29,10 @@ function errorHandler(err, req, res, next) {
     USER_NOT_FOUND: "Usuário não encontrado.",
     PASSWORD_TOO_SHORT: "A senha deve ter no mínimo 8 caracteres!",
     DUPLICATE_USERNAME: "Usuário com username já cadastrado!",
-    INVALID_CREDENTIALS: "Credenciais de autenticação inválidas!"
+    INVALID_CREDENTIALS: "Credenciais de autenticação inválidas!",
+    TOKEN_NOT_PROVIDED: "Token de acesso não fornecido.",
+    TOKEN_MALFORMATTED: "Token mal formatado. O formato esperado é 'Bearer <token>'.",
+    INVALID_TOKEN: "Token inválido ou expirado.",
   };
 
   const message = messages[err.message] || "Erro interno do servidor.";
