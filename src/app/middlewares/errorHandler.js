@@ -29,6 +29,7 @@ function errorHandler(err, req, res, next) {
     USER_NOT_FOUND: "Usuário não encontrado.",
     PASSWORD_TOO_SHORT: "A senha deve ter no mínimo 8 caracteres!",
     DUPLICATE_USERNAME: "Usuário com username já cadastrado!",
+    INVALID_CREDENTIALS: "Credenciais de autenticação inválidas!"
   };
 
   const message = messages[err.message] || "Erro interno do servidor.";
