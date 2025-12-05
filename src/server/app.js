@@ -2,7 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const morgan = require("morgan");
 const routes = require("../app/routes");
-const { errorHandler } = require("../app/middlewares/errorHandler");
+const errorHandler = require("../app/middlewares/errorHandler");
 
 function createApp() {
   const app = express();
