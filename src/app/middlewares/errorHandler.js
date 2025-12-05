@@ -33,6 +33,8 @@ function errorHandler(err, req, res, next) {
     TOKEN_NOT_PROVIDED: "Token de acesso não fornecido.",
     TOKEN_MALFORMATTED: "Token mal formatado. O formato esperado é 'Bearer <token>'.",
     INVALID_TOKEN: "Token inválido ou expirado.",
+    ACCESS_DENIED: "Acesso negado: Usuário não autenticado.",
+    FORBIDDEN: "Acesso proibido: Você não tem permissão para acessar este recurso.",
   };
 
   const message = messages[err.message] || "Erro interno do servidor.";
