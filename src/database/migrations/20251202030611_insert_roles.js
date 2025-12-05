@@ -1,12 +1,14 @@
+const roles = require("../../config/roles");
+
 /**
  * @param { import("knex").Knex } knex
  * @returns { Promise<void> }
  */
 exports.up = async function(knex) {
     await knex("Roles").insert([
-        { role: "admin" },
-        { role: "editor" },
-        { role: "viewer" },
+        { id: roles.ADMIN, role: "admin" },
+        { id: roles.EDITOR, role: "editor" },
+        { id: roles.VIEWER, role: "viewer" },
     ])
 };
 
