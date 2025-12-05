@@ -1,5 +1,6 @@
 const UserRepository = require("../repositories/UserRepository");
-const bcrypt = require("bcrypt")
+const bcrypt = require("bcrypt");
+const roles = require("../../config/roles");
 
 class UserService {
   async getAllUsers() {
@@ -46,7 +47,7 @@ class UserService {
       throw error;
     }
 
-    const role_id = 3;
+    const role_id = roles.VIEWER;
     const password_hash = await bcrypt.hash(password, 12);
 
     return UserRepository.create({ username, password_hash, role_id });
