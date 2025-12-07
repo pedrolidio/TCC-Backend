@@ -14,7 +14,13 @@ exports.up = function(knex) {
                     license_plate GLOB '[A-Z][A-Z][A-Z][0-9][0-9][0-9][0-9]' OR
                     license_plate GLOB '[A-Z][A-Z][A-Z][0-9][A-Z][0-9][0-9]'
                 )
-            )
+            ),
+            vin TEXT NOT NULL UNIQUE CHECK (
+                LENGTH(vin) = 17 AND 
+                vin GLOB '[A-Z0-9]*' AND
+                vin NOT GLOB '*[IOQ]*'
+            ),
+            secret_hash TEXT NOT NULL
         );
     `);
 };
