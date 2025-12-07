@@ -2,7 +2,7 @@ const UserService = require("./UserService");
 const TokenProvider = require("../providers/TokenProvider");
 const bcrypt = require("bcrypt");
 
-class SessionService {
+class UserSessionService {
   async createSession({ username, password }) {
     if (!username || !password) {
       const error = new Error("MISSING_FIELDS");
@@ -44,4 +44,4 @@ class SessionService {
   }
 }
 
-module.exports = new SessionService();
+module.exports = new UserSessionService();

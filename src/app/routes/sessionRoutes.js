@@ -1,8 +1,8 @@
 const express = require("express");
 const router = express.Router();
-const SessionController = require("../controllers/SessionController"); 
+const UserSessionController = require("../controllers/UserSessionController"); 
 
 // POST /api/sessions - Autentica um usuário (Login)
-router.post("/", SessionController.create);    
+router.post("/user", UserSessionController.create);    
 
 module.exports = router;

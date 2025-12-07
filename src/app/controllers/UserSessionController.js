@@ -1,10 +1,10 @@
-const SessionService = require("../services/SessionService");
+const UserSessionService = require("../services/UserSessionService");
 
-class SessionController {
+class UserSessionController {
   async create(req, res, next) {
     try {
       const { username, password } = req.body;
-      const sessionData = await SessionService.createSession({ username, password });
+      const sessionData = await UserSessionService.createSession({ username, password });
       res.status(200).json({
         message: "Login realizado com sucesso!",
         ...sessionData,
@@ -15,4 +15,4 @@ class SessionController {
   }
 }
 
-module.exports = new SessionController();
+module.exports = new UserSessionController();
