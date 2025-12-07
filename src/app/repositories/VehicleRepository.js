@@ -18,8 +18,22 @@ class VehicleRepository {
   }
 
   async create(vehicleData) {
-    const [id] = await this.connection("Vehicles").insert(vehicleData);
-    return { id, ...vehicleData };
+    try {
+      const [id] = await this.connection("Vehicles").insert(vehicleData);
+      return { id, ...vehicleData };
+    } catch (error) {
+      if (error.message && error.message.includes("UNIQUE constraint failed: Vehicles.vin")) {
+        const err = new Error("DUPLICATE_VIN");
+        err.status = 409;
+        throw err;
+      }
+      else if (error.message && error.message.includes("UNIQUE constraint failed: Vehicles.license_plate")) {
+        const err = new Error("DUPLICATE_LICENSE_PLATE");
+        err.status = 409;
+        throw err;
+      }
+      throw error;
+    }
   }
 }
 

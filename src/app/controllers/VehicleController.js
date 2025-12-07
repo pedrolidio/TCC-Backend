@@ -22,9 +22,9 @@ class VehicleController {
 
   async create(req, res, next) {
     try {
-      const { manufacturer, model, year, license_plate } = req.body;
+      const { manufacturer, model, year, license_plate, vin } = req.body;
 
-      const newVehicle = await VehicleService.createVehicle({ manufacturer, model, year, license_plate });
+      const newVehicle = await VehicleService.createVehicle({ manufacturer, model, year, license_plate, vin });
       res.status(201).json({
         message: "Veículo cadastrado com sucesso!",
         vehicle: newVehicle,
