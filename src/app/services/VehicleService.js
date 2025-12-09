@@ -19,6 +19,16 @@ class VehicleService {
     return vehicle;
   }
 
+  async getVehicleByVin(vin) {
+    const vehicle = await VehicleRepository.findByVin(vin);
+    if (!vehicle) {
+      const error = new Error("VEHICLE_NOT_FOUND");
+      error.status = 404;
+      throw error;
+    }
+    return vehicle;
+  }
+
   async createVehicle({ manufacturer, model, year, license_plate, vin }) {
     if (!manufacturer || !model || !year || !license_plate || !vin) {
       const error = new Error("MISSING_FIELDS");

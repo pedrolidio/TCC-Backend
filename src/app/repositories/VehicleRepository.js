@@ -17,6 +17,10 @@ class VehicleRepository {
     return this.connection("Vehicles").where({ license_plate }).first();
   }
 
+  async findByVin(vin) {
+    return this.connection("Vehicles").where({ vin }).first();
+  }
+
   async create(vehicleData) {
     try {
       const [id] = await this.connection("Vehicles").insert(vehicleData);
