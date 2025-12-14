@@ -10,7 +10,7 @@ async function connectSQL() {
     return sqlConnection;
   }
 
-  const environment = env.nodeEnv;
+  const environment = env.app.nodeEnv;
   const config = knexConfig[environment];
   sqlConnection = knex(config);
 

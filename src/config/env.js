@@ -1,19 +1,29 @@
 require("dotenv").config();
 
-if (!process.env.MONGO_URI)
-  throw new Error("A variável de ambiente MONGO_URI não foi definida!");
+function getEnvVar(key, defaultValue = undefined) {
+  const value = process.env[key];
 
-if (!process.env.JWT_SECRET) {
-  throw new Error("A variável de ambiente JWT_SECRET não foi definida!");
+  if (!value) {
+    if (defaultValue !== undefined) {
+      return defaultValue;
+    }
+
+    throw new Error(`CRITICAL: A variável de ambiente obrigatória '${key}' não foi definida.`);
+  }
+
+  return value;
 }
 
 module.exports = {
-  port: process.env.PORT || 3000,
-  mongoUri: process.env.MONGO_URI,
-  nodeEnv: process.env.NODE_ENV || "development",
-
+  app: {
+    port: getEnvVar("PORT", 3000),
+    nodeEnv: getEnvVar("NODE_ENV", "development"),
+  },
+  db: {
+    mongoUri: getEnvVar("MONGO_URI"),
+  },
   jwt: {
-    secret: process.env.JWT_SECRET,
-    expiresIn: process.env.JWT_EXPIRES_IN || "1d", // Valor padrão caso não definido
+    secret: getEnvVar("JWT_SECRET"),
+    expiresIn: getEnvVar("JWT_EXPIRES_IN", "1d"),
   },
 };

@@ -13,7 +13,7 @@ const { startServer } = require("./server/server");
 
     // Inicia o servidor Express
     const app = await startServer();
-    const port = env.port;
+    const port = env.app.port;
 
     app.listen(port, () => console.log(`Servidor rodando em http://localhost:${port}`));
   } catch (error) {

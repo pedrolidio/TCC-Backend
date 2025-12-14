@@ -2,7 +2,7 @@ const env = require("./env");
 const mongoose = require("mongoose");
 
 async function connectMongoDB() {
-  const uri = env.mongoUri;
+  const uri = env.db.mongoUri;
   try {
     await mongoose.connect(uri);
     console.log("MongoDB conectado com sucesso.");
