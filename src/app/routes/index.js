@@ -10,9 +10,9 @@ const userRoutes = require("./userRoutes");
 const sessionRoutes = require("./sessionRoutes");
 
 router.use("/drivers", driverRoutes);
-router.use("/vehicles", vehicleRoutes);
 router.use("/vehicles/:id/sensors", sensorsRoutes);
 router.use("/vehicles/:id/driving-configurations", drivingConfigurationRoutes);
+router.use("/vehicles", vehicleRoutes);
 router.use("/sensors-data", sensorsDataRoutes);
 router.use("/users", userRoutes);
 router.use("/sessions", sessionRoutes);
