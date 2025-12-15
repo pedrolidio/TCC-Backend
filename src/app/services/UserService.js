@@ -47,7 +47,7 @@ class UserService {
       throw error;
     }
 
-    const role_id = roles.VIEWER;
+    const role_id = roles.MONITOR;
     const password_hash = await bcrypt.hash(password, 12);
 
     return UserRepository.create({ username, password_hash, role_id });

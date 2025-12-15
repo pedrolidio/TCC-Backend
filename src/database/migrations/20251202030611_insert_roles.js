@@ -7,8 +7,8 @@ const roles = require("../../config/roles");
 exports.up = async function(knex) {
     await knex("Roles").insert([
         { id: roles.ADMIN, role: "admin" },
-        { id: roles.EDITOR, role: "editor" },
-        { id: roles.VIEWER, role: "viewer" },
+        { id: roles.MANAGER, role: "manager" },
+        { id: roles.MONITOR, role: "monitor" },
     ])
 };
 
@@ -20,8 +20,8 @@ exports.down = async function(knex) {
     await knex("Roles")
         .whereIn("role", [
             "admin", 
-            "editor", 
-            "viewer",
+            "manager", 
+            "monitor",
         ])
         .del();
 };
