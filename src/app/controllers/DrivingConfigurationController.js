@@ -13,7 +13,8 @@ class DrivingConfigurationController {
 
   async active(req, res, next) {
     try {
-      const { id } = req.params;
+      const id = req.userId;
+
       const config = await DrivingConfigurationService.getActiveConfig(id);
       res.json(config);
     } catch (error) {

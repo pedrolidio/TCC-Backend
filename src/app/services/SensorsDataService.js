@@ -19,11 +19,11 @@ class SensorsDataService {
     );
   }
 
-  _validateAndTransformData(sensorData, activeConfig) {
+  _validateAndTransformData(vehicle_id, sensorData, activeConfig) {
     const { sensors: expectedSensors, include_gps: gpsExpected } = activeConfig;
     
     const processedData = {
-      vehicle_id: sensorData.vehicle_id,
+      vehicle_id,
       timestamp: new Date(sensorData.timestamp),
     };
 
@@ -70,8 +70,8 @@ class SensorsDataService {
     return processedData;
   }
 
-  async create(sensorData) {
-    if (!sensorData.vehicle_id || !sensorData.timestamp) {
+  async create(vehicle_id, sensorData) {
+    if (!vehicle_id || !sensorData.timestamp) {
       const error = new Error("MISSING_DATA_BODY_FIELDS");
       error.status = 400;
       throw error;
@@ -80,7 +80,7 @@ class SensorsDataService {
     let activeConfig;
 
     try {
-      activeConfig = await DrivingConfigurationService.getActiveConfig(sensorData.vehicle_id);
+      activeConfig = await DrivingConfigurationService.getActiveConfig(vehicle_id);
     } catch (error) {
       if (error.status === 404 && error.message === "NO_ACTIVE_CONFIG") {
         const validationError = new Error("NO_ACTIVE_CONFIG_FOR_VEHICLE");
@@ -90,7 +90,7 @@ class SensorsDataService {
       throw error;
     }
 
-    const processedData = this._validateAndTransformData(sensorData, activeConfig);
+    const processedData = this._validateAndTransformData(vehicle_id, sensorData, activeConfig);
 
     return await SensorsDataRepository.create(processedData);
   }

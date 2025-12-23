@@ -13,7 +13,7 @@ class SensorsController {
 
   async create(req, res, next) {
     try {
-      const { id } = req.params;
+      const id = req.userId;
       const { supported_obd_commands } = req.body;
 
       const result = await SensorsService.registerVehicleSensors(id, supported_obd_commands);

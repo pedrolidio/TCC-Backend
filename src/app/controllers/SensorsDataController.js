@@ -15,7 +15,8 @@ class SensorsDataController {
 
   async create(req, res, next) {
     try {
-      const storedData = await SensorsDataService.create(req.body);
+      const id = req.userId;
+      const storedData = await SensorsDataService.create(id, req.body);
 
       return res.status(201).json(storedData);
     } catch (error) {
