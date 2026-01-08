@@ -83,6 +83,31 @@ class UserService {
 
     return UserRepository.update(id, { role_id: roleId });
   }
+
+  async updateUserPassword(id, newPassword) {
+    if (!newPassword) {
+      const error = new Error("MISSING_FIELDS");
+      error.status = 400;
+      throw error;
+    }
+
+    if (newPassword.length < 8) {
+      const error = new Error("PASSWORD_TOO_SHORT");
+      error.status = 400;
+      throw error;
+    }
+
+    const user = await UserRepository.findById(id);
+    if (!user) {
+      const error = new Error("USER_NOT_FOUND");
+      error.status = 404;
+      throw error;
+    }
+
+    const password_hash = await bcrypt.hash(newPassword, 12);
+
+    return UserRepository.update(id, { password_hash });
+  }
 }
 
 module.exports = new UserService();

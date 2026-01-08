@@ -20,4 +20,7 @@ router.post("/", checkRole([roles.ADMIN]), UserController.create);
 // PATCH /api/users/:id/role
 router.patch("/:id/role", checkRole([roles.ADMIN]), UserController.updateRole);
 
+// PATCH /api/users/:id/password
+router.patch("/:id/password", checkRole([roles.ADMIN]), UserController.updatePassword);
+
 module.exports = router;

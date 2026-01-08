@@ -48,6 +48,19 @@ class UserController {
       next(error);
     }
   }
+
+  async updatePassword(req, res, next) {
+    try {
+      const { id } = req.params;
+      const { password } = req.body;
+
+      await UserService.updateUserPassword(id, password);
+
+      res.json({ message: "Senha atualizada com sucesso." });
+    } catch (error) {
+      next(error);
+    }
+  }
 }
 
 module.exports = new UserController();
