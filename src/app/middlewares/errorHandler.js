@@ -39,6 +39,8 @@ function errorHandler(err, req, res, next) {
     INVALID_TOKEN: "Token inválido ou expirado.",
     ACCESS_DENIED: "Acesso negado: Usuário não autenticado.",
     FORBIDDEN: "Acesso proibido: Você não tem permissão para acessar este recurso.",
+    INVALID_ROLE: "A role fornecida é inválida. Roles permitidas: ADMIN, MANAGER ou MONITOR.",
+    ROOT_USER_IMMUTABLE: "Não é permitido alterar o nível de permissão do administrador raiz (ID: 1).",
   };
 
   const message = messages[err.message] || "Erro interno do servidor.";

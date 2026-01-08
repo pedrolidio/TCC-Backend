@@ -27,6 +27,12 @@ class UserRepository {
 
     return { id, ...userSafeData };
   }
+
+  async update(id, data) {
+    await this.connection("Users").where({ id }).update(data);
+    
+    return this.findById(id);
+  }
 }
 
 module.exports = new UserRepository();

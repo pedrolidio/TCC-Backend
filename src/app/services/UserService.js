@@ -52,6 +52,37 @@ class UserService {
 
     return UserRepository.create({ username, password_hash, role_id });
   }
+
+  async updateUserRole(id, roleId) {
+    if (!roleId) {
+      const error = new Error("MISSING_FIELDS");
+      error.status = 400;
+      throw error;
+    }
+
+    if (parseInt(id) === 1) {
+      const error = new Error("ROOT_USER_IMMUTABLE");
+      error.status = 403;
+      throw error;
+    }
+
+    const validRoles = [roles.ADMIN, roles.MANAGER, roles.MONITOR];
+
+    if (!validRoles.includes(roleId)) {
+      const error = new Error("INVALID_ROLE");
+      error.status = 400;
+      throw error;
+    }
+
+    const user = await UserRepository.findById(id);
+    if (!user) {
+      const error = new Error("USER_NOT_FOUND");
+      error.status = 404;
+      throw error;
+    }
+
+    return UserRepository.update(id, { role_id: roleId });
+  }
 }
 
 module.exports = new UserService();

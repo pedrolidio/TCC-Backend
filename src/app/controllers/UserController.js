@@ -32,6 +32,22 @@ class UserController {
       next(error);
     }
   }
+
+  async updateRole(req, res, next) {
+    try {
+      const { id } = req.params;
+      const { role_id } = req.body;
+
+      const updatedUser = await UserService.updateUserRole(id, role_id);
+
+      res.json({
+        message: "Permissão do usuário atualizada com sucesso.",
+        user: updatedUser
+      });
+    } catch (error) {
+      next(error);
+    }
+  }
 }
 
 module.exports = new UserController();
